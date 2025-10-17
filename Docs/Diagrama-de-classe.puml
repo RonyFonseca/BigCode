@@ -1,0 +1,42 @@
+@startuml
+class Usuario {
+    - id: Long
+    - nickname: String
+    - nivel: String
+    - pontuacao: int
+    + login()
+    + logout()
+}
+
+class Aluno {
+    +resolverDesafio()
+    +verRanking()
+}
+
+class Administrador {
+    +cadastrarDesafio()
+}
+
+class Desafio {
+    - id: Long
+    - titulo: String
+    - codigo: String
+    - nivel: String
+    - tags: List<String>
+    - opcoesResposta: List<String>
+    - respostaCorreta: String
+    - explicacao: String
+    +validarResposta(resposta: String): Boolean
+}
+
+class Ranking {
+    - top10: List<Usuario>
+    +atualizarRanking(usuario: Usuario)
+}
+
+Usuario <|-- Aluno
+Usuario <|-- Administrador
+Aluno --> Desafio : "resolver"
+Administrador --> Desafio : "cadastrar"
+Ranking --> Usuario : "pontuação"
+@enduml

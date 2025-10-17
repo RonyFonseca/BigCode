@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor Aluno
+actor Administrador as ADM
+
+rectangle "BigCode" {
+  Aluno --> (Visualizar Lista de Desafios)
+  Aluno --> (Resolver Desafio)
+  Aluno --> (Ver Ranking Global)
+  Aluno --> (Login/Cadastro)
+
+  ADM --> (Cadastrar Novo Desafio)
+  ADM --> (Login/Cadastro)
+}
+
+(Resolver Desafio) --> (Receber Feedback Imediato)
+@enduml

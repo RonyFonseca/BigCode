@@ -1,0 +1,22 @@
+@startuml
+package "Requisitos Funcionais" {
+  RF1 : Login / Cadastro
+  RF2 : Visualizar Lista de Desafios
+  RF3 : Resolver Desafio
+  RF4 : Receber Feedback Imediato
+  RF5 : Ranking Global
+  RF6 : Cadastrar Novos Desafios (ADM)
+}
+
+package "Regras de Negócio" {
+  RN1 : Pontuação +10/-5
+  RN2 : Top 10 jogadores no ranking
+  RN3 : Complexidade correta do algoritmo
+}
+
+RF1 --> RN1
+RF3 --> RN1
+RF5 --> RN2
+RF6 --> RN3
+RF4 --> RN3
+@enduml

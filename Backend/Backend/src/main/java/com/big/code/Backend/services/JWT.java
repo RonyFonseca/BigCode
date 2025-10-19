@@ -34,7 +34,7 @@ public class JWT {
 
     public boolean validateToken(String token){
         try {
-            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJwt(token);
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
             return true;
         }catch (Exception e){
             return false;

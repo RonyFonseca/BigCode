@@ -80,7 +80,7 @@ public class User {
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
                 ", nivel='" + nivel + '\'' +
-                ", ponntuacao=" + pontuacao +
+                ", pontuacao=" + pontuacao +
                 '}';
     }
 }

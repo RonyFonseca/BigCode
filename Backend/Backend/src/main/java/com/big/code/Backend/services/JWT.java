@@ -14,8 +14,7 @@ import java.util.Date;
 @Component
 public class JWT {
 
-    @Value("${jwt.secret}")
-    private String SECRET;
+    private String SECRET = "awsdaawsdadsawsdawsdawsdawsdawsda";
 
     private Key secretKey;
 

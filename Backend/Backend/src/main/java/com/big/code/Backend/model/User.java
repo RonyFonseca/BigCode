@@ -2,8 +2,10 @@ package com.big.code.Backend.model;
 
 
 import com.big.code.Backend.model.enums.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,11 +30,13 @@ public class User {
     @Column(nullable = false)
     private String senha;
 
-    @Column(nullable = false, columnDefinition = "smallint default 0")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoUsuario tipo;
 
     //Relacioamento de 1 - n
     @OneToMany(mappedBy = "dono", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Questoes> questoes;
 
     public TipoUsuario getTipo() {

@@ -3,6 +3,7 @@ package com.big.code.Backend.controller;
 import com.big.code.Backend.dataTransferObject.ApiResponse;
 import com.big.code.Backend.dataTransferObject.dtoUser;
 import com.big.code.Backend.model.User;
+import com.big.code.Backend.model.enums.TipoUsuario;
 import com.big.code.Backend.repository.UserRepository;
 import com.big.code.Backend.services.JWT;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,36 @@ public class UserController {
         this.jwt = jwt;
     }
 
+    @RequestMapping("/create/teacher")
+    @PostMapping
+    public ResponseEntity<ApiResponse> createUserAdm(@RequestBody User user){
+
+        String emailTag = user.getEmail().split("@")[1];
+
+        if(emailTag.equals("upe.br")){//Validação do usuário, validar email
+            user.setNivel("Professor UPE");
+        }else{
+            user.setNivel("Professor");
+        }
+
+        user.setPontuacao(0);
+        user.setTipo(TipoUsuario.ADM);
+
+        if(repository.existsByEmail(user.getEmail())) {
+            return ResponseEntity.status(409).body(new ApiResponse("Este usuário já existe !"));
+        }
+
+        BCryptPasswordEncoder senhaHash = new BCryptPasswordEncoder();
+        String novaSenha = senhaHash.encode(user.getSenha());
+        user.setSenha(novaSenha);
+
+        repository.save(user);
+        String token = jwt.generateToken(user.getEmail());
+
+        return ResponseEntity.status(200).body(new ApiResponse("Usuário criado com sucesso !", token));
+    }
+
+    @RequestMapping("/create")
     @PostMapping
     public ResponseEntity<ApiResponse> createUser(@RequestBody User user){
 
@@ -34,6 +65,7 @@ public class UserController {
         }
 
         user.setPontuacao(0);
+        user.setTipo(TipoUsuario.ALUNO);
 
         if(repository.existsByEmail(user.getEmail())) {
             return ResponseEntity.status(409).body(new ApiResponse("Este usuário já existe !"));

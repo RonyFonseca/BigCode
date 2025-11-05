@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/questoes")
@@ -97,6 +96,18 @@ public class QuestoesController {
 
     }
 
+    @RequestMapping("/{id}")
+    @GetMapping
+    public ResponseEntity<?> pegarQuestao(@PathVariable Long id, @RequestHeader String token){
+        token = token.split("Bearer ")[1];
+
+        if(!(jwt.validateToken(token))){
+            return ResponseEntity.status(400).body(new ApiResponse("Token inválido"));
+        }
+
+        return ResponseEntity.status(200).body(repositoryQuest.findById(id));
+    }
+
     @RequestMapping("/responder/{id}")
     @PutMapping
     public ResponseEntity<ApiResponse> responderQuestao(@PathVariable Long id, @RequestHeader String token, @RequestBody Map<String, String> body){
@@ -109,12 +120,29 @@ public class QuestoesController {
         Questoes questaoDoBanco = repositoryQuest.findById(id).orElse(null);
         User userToken = repositoryUser.findByEmail(jwt.extractEmail(token));
 
+        if(!(questaoDoBanco.getRespostas().isEmpty())){
+            for(Long ids:questaoDoBanco.getRespostas()){
+                if(ids.equals(userToken.getId())){
+                    userToken.setPontuacao(userToken.getPontuacao()+1);
+                }
+            }
+        } else {
+            userToken.setPontuacao(userToken.getPontuacao()+20);
+            questaoDoBanco.setRespostas(userToken.getId());
+        }
+
         if(!(body.get("alternativaUsuario").toLowerCase().equals(questaoDoBanco.getAlternativaCorreta().toLowerCase()))) {
             return ResponseEntity.status(400).body(new ApiResponse("Resposta incorreta"));
         }
 
-        userToken.setPontuacao(userToken.getPontuacao()+10);
         repositoryUser.save(userToken);
         return ResponseEntity.status(200).body(new ApiResponse("Resposta Correta !"));
     }
+
+    @GetMapping
+    public ResponseEntity<?> pegarTodasQuestoes(){
+        return ResponseEntity.status(200).body(repositoryQuest.findAll());
+    }
+
+
 }

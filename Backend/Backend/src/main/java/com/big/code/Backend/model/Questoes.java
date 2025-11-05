@@ -1,5 +1,7 @@
 package com.big.code.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,15 +18,29 @@ public class Questoes {
     private String enunciado;
 
     @Column(nullable = false)
-    private ArrayList<String> alternativas;
+    @JsonIgnore //Evitar a serialização recursiva
+    private ArrayList<String> alternativas = new ArrayList<>();
 
     @Column(nullable = false)
     private String alternativaCorreta;
 
+    @Column(nullable = false)
+    @JsonIgnore
+    private ArrayList<Long> respostas= new ArrayList<>();
+
     //outra ponta do relacionamento n - 1
     @ManyToOne
     @JoinColumn(name="dono_id")
+    @JsonIgnoreProperties({"senha","tipo","email","id","pontuacao"})
     private User dono;
+
+    public ArrayList<Long> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(Long id) {
+        this.respostas.add(id);
+    }
 
     public Long getId() {
         return id;

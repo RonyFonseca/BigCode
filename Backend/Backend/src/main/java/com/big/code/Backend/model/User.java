@@ -1,7 +1,10 @@
 package com.big.code.Backend.model;
 
 
+import com.big.code.Backend.model.enums.TipoUsuario;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +27,29 @@ public class User {
 
     @Column(nullable = false)
     private String senha;
+
+    @Column(nullable = false, columnDefinition = "smallint default 0")
+    private TipoUsuario tipo;
+
+    //Relacioamento de 1 - n
+    @OneToMany(mappedBy = "dono", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Questoes> questoes;
+
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Questoes> getQuestoes() {
+        return questoes;
+    }
+
+    public void setQuestoes(List<Questoes> questoes) {
+        this.questoes = questoes;
+    }
 
     public Long getId() {
         return id;

@@ -27,7 +27,7 @@ public class UserController {
 
         String emailTag = user.getEmail().split("@")[1];
 
-        if(emailTag.equals("upe.br")){
+        if(emailTag.equals("upe.br")){//Validação do usuário, validar email
             user.setNivel("UPE");
         }else{
             user.setNivel("Iniciante");
@@ -87,7 +87,6 @@ public class UserController {
         User userToken = repository.findByEmail(jwt.extractEmail(token));
 
         Optional<User> usuarioDoBanco = repository.findById(id);
-
         if(usuarioDoBanco.isEmpty() || !usuarioDoBanco.get().getId().equals(userToken.getId())){
             return ResponseEntity.status(400).body(new ApiResponse("Você não pode remover uma conta que não é sua"));
         }

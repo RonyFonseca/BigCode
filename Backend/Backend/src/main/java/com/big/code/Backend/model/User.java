@@ -34,6 +34,14 @@ public class User {
     @Column(nullable = false)
     private TipoUsuario tipo;
 
+    public User(String nickname, String email, String senha, TipoUsuario tipo, String nivel) {
+        this.nickname = nickname;
+        this.email = email;
+        this.senha = senha;
+        this.tipo = tipo;
+        this.nivel = nivel;
+    }
+
     //Relacioamento de 1 - n
     @OneToMany(mappedBy = "dono", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

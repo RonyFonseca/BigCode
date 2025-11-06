@@ -1,11 +1,14 @@
 package com.big.code.Backend.controller;
 
 import com.big.code.Backend.dataTransferObject.ApiResponse;
+import com.big.code.Backend.dataTransferObject.dtoConfirmacao;
 import com.big.code.Backend.dataTransferObject.dtoUser;
 import com.big.code.Backend.model.User;
 import com.big.code.Backend.model.enums.TipoUsuario;
 import com.big.code.Backend.repository.UserRepository;
+import com.big.code.Backend.services.EmailCodeService;
 import com.big.code.Backend.services.JWT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -15,61 +18,60 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
     private final UserRepository repository;
+
+    @Autowired
     private final JWT jwt;
+
+    @Autowired
+    private EmailCodeService emailCodeService;
 
     public UserController(UserRepository repository,JWT jwt){
         this.repository = repository;
         this.jwt = jwt;
     }
 
-    @RequestMapping("/create/teacher")
-    @PostMapping
-    public ResponseEntity<ApiResponse> createUserAdm(@RequestBody User user){
-
-        String emailTag = user.getEmail().split("@")[1];
-
-        if(emailTag.equals("upe.br")){//Validação do usuário, validar email
-            user.setNivel("Professor UPE");
-        }else{
-            user.setNivel("Professor");
-        }
-
-        user.setPontuacao(0);
-        user.setTipo(TipoUsuario.ADM);
-
-        if(repository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(409).body(new ApiResponse("Este usuário já existe !"));
-        }
-
-        BCryptPasswordEncoder senhaHash = new BCryptPasswordEncoder();
-        String novaSenha = senhaHash.encode(user.getSenha());
-        user.setSenha(novaSenha);
-
-        repository.save(user);
-        String token = jwt.generateToken(user.getEmail());
-
-        return ResponseEntity.status(200).body(new ApiResponse("Usuário criado com sucesso !", token));
-    }
-
     @RequestMapping("/create")
     @PostMapping
-    public ResponseEntity<ApiResponse> createUser(@RequestBody User user){
+    public ResponseEntity<ApiResponse> inicioCriacao(@RequestBody User user){
+        if(repository.existsByEmail(user.getEmail())){
+            return ResponseEntity.status(409).body(new ApiResponse("Este usuário já existe !"));
+        }
 
-        String emailTag = user.getEmail().split("@")[1];
+        emailCodeService.gerarEEnviarCodigo(user.getEmail());
+        return ResponseEntity.status(200).body(new ApiResponse("Foi enviado um email para: "+user.getEmail()));
+    }
+
+    @RequestMapping("/confirm/create")
+    @PostMapping
+    public ResponseEntity<ApiResponse> finalCriacao(@RequestBody dtoConfirmacao dto){
+
+        String emailTag = dto.getEmail().split("@")[1];
+
+        String nivel = "";
+        TipoUsuario tipo =null;
 
         if(emailTag.equals("upe.br")){//Validação do usuário, validar email
-            user.setNivel("UPE");
+            nivel = "UPE";
         }else{
-            user.setNivel("Iniciante");
+            nivel = "Iniciante";
+        }
+
+        if(dto.getTipo().equals(TipoUsuario.ADM) || dto.getTipo().equals(TipoUsuario.ALUNO)){
+            tipo = dto.getTipo();
+        }
+
+        User user = new User(dto.getNickname(), dto.getEmail(), dto.getSenha(), tipo, nivel);
+        String codigo = dto.getCodigo();
+
+        boolean emailValido = emailCodeService.verificarCodigo(user.getEmail(), codigo);
+
+        if(!(emailValido)){
+            return ResponseEntity.status(409).body(new ApiResponse("Email inválido ou expirado !"));
         }
 
         user.setPontuacao(0);
-        user.setTipo(TipoUsuario.ALUNO);
-
-        if(repository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(409).body(new ApiResponse("Este usuário já existe !"));
-        }
 
         BCryptPasswordEncoder senhaHash = new BCryptPasswordEncoder();
         String novaSenha = senhaHash.encode(user.getSenha());

@@ -5,12 +5,15 @@ import com.big.code.Backend.model.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,8 +47,13 @@ public class User {
 
     //Relacioamento de 1 - n
     @OneToMany(mappedBy = "dono", cascade = CascadeType.ALL, orphanRemoval = true)
+
     @JsonIgnore
     private List<Questoes> questoes;
+
+    public User() {
+
+    }
 
     public TipoUsuario getTipo() {
         return tipo;

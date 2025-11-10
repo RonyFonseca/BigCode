@@ -1,6 +1,8 @@
+import styles from "./Button.module.css";
+
 function Button(props){
     return (
-        <div>
+        <div className={styles.butao}>
             <button>{props.assunto}</button>
         </div>
     )

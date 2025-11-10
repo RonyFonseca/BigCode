@@ -1,0 +1,31 @@
+.input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    display: flex;
+    position: absolute;
+    font-size: 40px;
+    left: 10px;
+    gap: 10px;
+}
+
+.icon > i {
+    margin-left: 10px;
+}
+
+.icon > p {
+    font-size: 35px;
+}
+
+.input > input {
+    border: 3px solid var(--color-02-purple);
+    height: 55px;
+    width: 440px;
+    font-size: 25px;
+    text-align: center;
+    border-radius: 10px;
+}

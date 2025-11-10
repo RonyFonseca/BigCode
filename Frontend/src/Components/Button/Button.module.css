@@ -1,0 +1,7 @@
+.butao > button {
+    height: 50px;
+    width: 130px;
+    border-radius: 10px;
+    border: 3px solid var(--color-02-purple);
+    font-size: 17px;
+}

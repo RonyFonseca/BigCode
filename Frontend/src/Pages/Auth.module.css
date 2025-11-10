@@ -1,0 +1,34 @@
+#tela_central {
+    background-color:#A28EC8;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    gap: 50px;
+}
+
+.logo > img {
+    width: 650px;
+}
+
+.form_lateral {
+    border-radius: 80px 0px 0px 80px;
+    background-color: var(--color-02-white);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_lateral_informacoes {
+    text-align: center;
+    font-size: 24px;
+}
+
+.form_lateral_inputs {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

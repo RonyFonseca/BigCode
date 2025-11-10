@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto/Roboto-VariableFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PTSans';
+  src: url('./assets/fonts/PTSans/PTSans-Bold.ttf') format('truetype');
+}
+
+:root{
+    --color-01-white:"#F5F6EB";
+    --color-02-white:"#FEFFF9"; 
+    --color-01-blue:"#D9EBFA";
+    --color-01-purple:"#666786";
+    --color-02-purple:"#A28EC8";
+    --font-PTSans:"PTSans";
+    --font-Roboto:"Roboto";
+}
+
+h1{
+    font-family: var(--font-PTSans);
+}
+
+h2{
+    font-family: var(--font-Roboto);
+}

@@ -6,7 +6,11 @@
     gap: 50px;
 }
 
-.logo > img {
+#logo {
+    margin-bottom: 50px;
+}
+
+.container_img > img {
     width: 650px;
 }
 

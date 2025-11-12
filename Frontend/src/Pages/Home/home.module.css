@@ -1,0 +1,21 @@
+.container_home {
+    background-color: var(--color-01-pink);
+    height: 100vh;
+    max-width: 100%;
+}
+
+.sub_container_home {
+    background-color: var(--color-02-white);
+    margin: 0px 35px;
+    height: 100vh;
+    max-width: 100%;
+}
+
+.cards_home {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+

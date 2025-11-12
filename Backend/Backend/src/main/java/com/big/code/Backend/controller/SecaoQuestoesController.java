@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class SecaoQuestoesController {
@@ -34,6 +35,19 @@ public class SecaoQuestoesController {
         this.questoesRepository = questoesRepository;
         this.userRepository = userRepository;
         this.jwt = jwt;
+    }
+
+    @GetMapping("/pegarSecoes")
+    public ResponseEntity<ApiResponse> pegarTodasSecoes(@RequestHeader String token){
+        token = token.split("Bearer ")[1];
+
+        if(!(jwt.validateToken(token))){
+            return ResponseEntity.status(400).body(new ApiResponse("Token inválido"));
+        }
+
+        List<SecaoDeQuestoes> secao = secaoRepository.findAll();
+
+        return ResponseEntity.status(200).body(new ApiResponse("todas seções", secao));
     }
 
     @GetMapping("/pegarQuestoes/secao/{idSecao}")

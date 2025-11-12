@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+header > i {
+    font-size: 35px;
+}
+
+header > img {
+    width: 100px;
+}

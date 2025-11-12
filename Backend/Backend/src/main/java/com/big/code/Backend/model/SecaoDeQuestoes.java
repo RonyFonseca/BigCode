@@ -23,7 +23,7 @@ public class SecaoDeQuestoes {
 
     @ManyToOne
     @JoinColumn(name="dono_id")
-    @JsonIgnoreProperties({"senha","tipo","email","id","pontuacao"})
+    @JsonIgnoreProperties({"senha","tipo","email","id",})
     private User dono;
 
     public SecaoDeQuestoes(){}

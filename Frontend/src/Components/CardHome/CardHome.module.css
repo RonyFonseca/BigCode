@@ -1,0 +1,43 @@
+.card_container {
+    background-color: var(--color-01-white);
+    width: 700px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.card_header > h3{
+    font-size: 40px;
+}
+
+.card_header > p{
+    font-size: 20px;
+}
+
+.card_footer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card_informations {
+    background-color: var(--color-02-white);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.card_informations > h5 {
+    font-size: 20px;
+}
+
+.card_informations > ul {
+    list-style: none;
+}
+
+.card_teacher > h5{
+    font-size: 20px;
+    margin-bottom: 5px;
+}

@@ -1,16 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input.jsx";
 import Button from "../../Components/Button/Button.jsx";
 
-import styles from ".././Auth.module.css";
+import styles from "./Auth.module.css";
 
 import logo from "../../assets/images/logo.PNG";
 
 import usuarioCadastrando from "../../assets/images/auth/usuario_cadastrando.svg"
 
+import { useAuth } from "../../context/AuthContext.jsx";
+
 
 function Register(){
 
+    const {login} = useAuth();
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [nome, setNome] = useState("");
@@ -32,9 +38,10 @@ function Register(){
         setSenhaConfirmacao(event);
     }
 
-    const enviarDados = (e) => {
+    const enviarDados = async(e) => {
         e.preventDefault(); 
-        console.log(nome,email,senha);
+        const ok = await login(email,senha);
+        navigate("/register/validate");
     }
 
     return (

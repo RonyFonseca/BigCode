@@ -1,7 +1,7 @@
 import Input from "../../Components/Input/Input.jsx";
 import Button from "../../Components/Button/Button.jsx";
 
-import styles from ".././Auth.module.css";
+import styles from "./Auth.module.css";
 
 import usuarioLogando from "../../assets/images/auth/usuario_logando.svg";
 import logo from "../../assets/images/logo.PNG";

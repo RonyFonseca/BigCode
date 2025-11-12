@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Login from "./Pages/Auth/Login.jsx"; 
 import Register from "./Pages/Auth/Register.jsx";
 import EmailValidate from "./Pages/Auth/EmailValidate.jsx";
+import Home from "./Pages/Home/Home.jsx"
 
 //---------Private------------
 import PrivateRoute from "./routes/PrivateRoute.jsx";
@@ -22,6 +23,8 @@ function App() {
           <Route path="/register" element={<Register/>} />
       
           <Route path="/register/validate" element={<PrivateRoute><EmailValidate /></PrivateRoute>} />
+
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

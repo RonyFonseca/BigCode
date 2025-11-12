@@ -29,3 +29,20 @@
     text-align: center;
     border-radius: 10px;
 }
+
+
+@media (max-width:1440px){
+    .icon {
+        font-size: 35px;
+    }
+
+    .icon > p {
+        font-size: 30px;
+    }
+
+    .input > input {
+        width: 420px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+}

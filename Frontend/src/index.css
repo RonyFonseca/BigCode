@@ -15,6 +15,8 @@
     --color-01-blue:#D9EBFA;
     --color-01-purple:#676887;
     --color-02-purple:#A28EC8;
+    --color-00-acerto:#23D043;
+    --color-00-erro:rgb(206, 4, 4);
     --font-PTSans:"PTSans";
     --font-Roboto:"Roboto";
 }

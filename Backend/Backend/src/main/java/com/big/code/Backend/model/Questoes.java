@@ -20,7 +20,6 @@ public class Questoes implements Serializable {
     private String enunciado;
 
     @Column(nullable = false)
-    @JsonIgnore //Evitar a serialização recursiva
     private ArrayList<String> alternativas = new ArrayList<>();
 
     @Column(nullable = false)

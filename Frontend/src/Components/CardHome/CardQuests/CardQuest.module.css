@@ -1,0 +1,67 @@
+.card_container_nao_respondido {
+    background-color: var(--color-01-white);
+    width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.enunciado_respondido {
+    color: var(--color-00-acerto)
+}
+
+.enunciado_nao_respondido {
+    color: var(--color-00-erro)
+}
+
+.card_header > h3{
+    font-size: 40px;
+}
+
+.card_header > p{
+    font-size: 17px;
+}
+
+.card_footer{
+    margin-top: 20px;
+    display: flex;
+}
+
+.card_quest_alternativa {
+    margin: 10px;
+}
+
+.card_quest_alternativas {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.card_quest_alternativas_buttons{
+    background-color: var(--color-02-white);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border:none;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.acertou {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border:none;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: var(--color-00-acerto)
+}
+
+.errou {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border:none;
+    border-radius: 50%;
+    margin-right: 5px;
+    background-color: var(--color-00-erro)
+}

@@ -100,7 +100,9 @@ function Home(){
                     <section className={styles.cards_home}>
                         {quest.map((questao_dados) =>(
                             <CardHome key={questao_dados.id}
-                        
+
+                                card_id={questao_dados.id}    
+
                                 titulo={questao_dados.titulo} 
                                 subTitulo={questao_dados.resumo} 
 

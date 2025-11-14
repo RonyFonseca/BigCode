@@ -1,8 +1,19 @@
 import styles from "./CardHome.module.css";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "../Button/Button.jsx";
 
 function CardHome(props){
+
+    const navigate = useNavigate(); 
+
+    const comecarQuests = (e) => { 
+        //Valido token para segurança; 
+        //Guardar a informação da questao no localHost 
+        localStorage.setItem("id_Secao", e); 
+        navigate("/quests/res");
+    }
     return(
         <div className={styles.card_container}>
 
@@ -31,7 +42,7 @@ function CardHome(props){
 
                 <div className={styles.card_teacher}>
                     <h5><i className="bi bi-person"></i> Prof: {props.name_prof}</h5>
-                    <Button assunto="Iniciar questão"/>
+                    <Button assunto="Iniciar questão" click={() => comecarQuests(props.card_id)}/>
                 </div>
 
             </div>

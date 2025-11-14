@@ -83,7 +83,7 @@ public class SecaoQuestoesController {
     }
 
     @PutMapping("/adicionar/secao/{idSecao}/{idQuest}")
-    public ResponseEntity<ApiResponse> adicionarQuestaoNaSecao(@PathVariable Long idSecao,@PathVariable Long idQuest,@RequestBody Questoes quest, @RequestHeader String token){
+    public ResponseEntity<ApiResponse> adicionarQuestaoNaSecao(@PathVariable Long idSecao,@PathVariable Long idQuest, @RequestHeader String token){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){
@@ -91,7 +91,8 @@ public class SecaoQuestoesController {
         }
 
         User userToken = userRepository.findByEmail(jwt.extractEmail(token));
-        SecaoDeQuestoes secao = secaoRepository.findById(idSecao).orElse(null);
+        SecaoDeQuestoes secao = secaoRepository.findById(idSecao).orElseThrow(() -> new RuntimeException("Seção não encontrada"));
+
 
         if(secao.getTitulo().isEmpty()){
             return ResponseEntity.status(400).body(new ApiResponse("Está seção nem existe primeiramente!"));
@@ -99,7 +100,7 @@ public class SecaoQuestoesController {
 
         Questoes questoes = questoesRepository.findById(idQuest).orElse(null);
 
-        if(!questoes.getAlternativas().isEmpty()){
+        if(questoes.getAlternativas().isEmpty()){
             return ResponseEntity.status(400).body(new ApiResponse("Está questão nem existe primeiramente!"));
         }
 

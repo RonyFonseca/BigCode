@@ -1,5 +1,4 @@
 .container_home {
-    background-color: var(--color-01-pink);
     height: 100vh;
     max-width: 100%;
 }
@@ -11,11 +10,24 @@
     max-width: 100%;
 }
 
-.cards_home {
+.informations_quests {
+    margin: 20px;
+}
+
+.cards_home{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    margin: 20px;
     align-items: center;
     justify-content: center;
+}
+
+.cards_quests {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px;
+    align-items: center;
 }
 

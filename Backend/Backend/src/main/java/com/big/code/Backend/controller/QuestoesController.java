@@ -2,6 +2,7 @@ package com.big.code.Backend.controller;
 
 
 import com.big.code.Backend.dataTransferObject.ApiResponse;
+import com.big.code.Backend.dataTransferObject.dtoQuest;
 import com.big.code.Backend.model.enums.TipoUsuario;
 import com.big.code.Backend.model.Questoes;
 import com.big.code.Backend.model.User;
@@ -11,6 +12,7 @@ import com.big.code.Backend.services.JWT;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
@@ -28,8 +30,9 @@ public class QuestoesController {
 
     @RequestMapping("/create")
     @PostMapping
-    public ResponseEntity<ApiResponse> criarQuestao(@RequestBody Questoes questao, @RequestHeader String token){
+    public ResponseEntity<ApiResponse> criarQuestao(@RequestBody dtoQuest dto, @RequestHeader String token){
 
+        Questoes questao = new Questoes();
         token = token.split("Bearer ")[1];
 
         if(!jwt.validateToken(token)){
@@ -42,7 +45,12 @@ public class QuestoesController {
             return ResponseEntity.status(400).body(new ApiResponse("Usuário sem poder para tal ato !"));
         }
 
+        questao.setEnunciado(dto.getEnunciado());
+        questao.setAlternativas(dto.getAlternativas());
+        questao.setAlternativaCorreta(dto.getAlternativaCorreta());
         questao.setDono(userToken);
+
+        System.out.println(questao);
 
         //Validar
         //questão está com tudo completo

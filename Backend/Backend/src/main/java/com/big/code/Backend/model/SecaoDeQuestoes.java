@@ -1,3 +1,4 @@
+
 package com.big.code.Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,7 +20,7 @@ public class SecaoDeQuestoes {
     @Column(nullable = false)
     private String resumo;
 
-    private ArrayList<Questoes> questoesList;
+    private ArrayList<Questoes> questoesList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="dono_id")

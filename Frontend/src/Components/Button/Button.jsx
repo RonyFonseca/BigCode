@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 function Button(props){
     return (
         <div className={styles.butao}>
-            <button>{props.assunto}</button>
+            <button onClick={() => props.click()}>{props.assunto}</button>
         </div>
     )
 }

@@ -31,3 +31,35 @@
     align-items: center;
 }
 
+.header_analise > h1 {
+    font-size: 35px;
+}
+
+.header_analise > p {
+    font-size: 20px;
+}
+
+.analise {
+    margin-bottom: 15px;
+}
+
+.analise > div {
+
+    margin-top: 20px;
+
+    background-color: var(--color-01-white);
+
+    padding: 20px;
+
+    border-radius: 20px;
+    width: 500px;
+}
+
+.analise > div > ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.analise > div > ul > li {
+    margin-top: 5px;
+}

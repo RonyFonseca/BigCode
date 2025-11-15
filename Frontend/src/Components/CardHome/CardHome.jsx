@@ -11,8 +11,7 @@ function CardHome(props){
     const comecarQuests = (e) => { 
         //Valido token para segurança; 
         //Guardar a informação da questao no localHost 
-        localStorage.setItem("id_Secao", e); 
-        navigate("/quests/res");
+        navigate(`/quests/res/${e}`);
     }
     return(
         <div className={styles.card_container}>

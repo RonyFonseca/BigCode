@@ -38,7 +38,7 @@ public class SecaoQuestoesController {
     }
 
     @GetMapping("/pegarSecoes")
-    public ResponseEntity<ApiResponse> pegarTodasSecoes(@RequestHeader String token){
+    public ResponseEntity<ApiResponse> pegarTodasSecoes(@RequestHeader("Authorization") String token){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){
@@ -51,7 +51,7 @@ public class SecaoQuestoesController {
     }
 
     @GetMapping("/pegarQuestoes/secao/{idSecao}")
-    public  ResponseEntity<ApiResponse> pegarQuestoeDaSecao(@PathVariable Long idSecao, @RequestHeader String token){
+    public  ResponseEntity<ApiResponse> pegarQuestoeDaSecao(@PathVariable Long idSecao, @RequestHeader("Authorization") String token){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){
@@ -66,7 +66,7 @@ public class SecaoQuestoesController {
     }
 
     @PostMapping("/create/secao")
-    public ResponseEntity<ApiResponse> criarSecao(@RequestBody dtoSecao dto, @RequestHeader String token){
+    public ResponseEntity<ApiResponse> criarSecao(@RequestBody dtoSecao dto, @RequestHeader("Authorization") String token){
 
         token = token.split("Bearer ")[1];
 
@@ -126,7 +126,7 @@ public class SecaoQuestoesController {
 
     @RequestMapping("/deletar/secao/questao/{idSecao}/{idQuest}")
     @PutMapping()
-    public ResponseEntity<ApiResponse> deletarQuestaoDaSecao(@RequestHeader String token, @PathVariable Long idSecao,@PathVariable Long idQuest){
+    public ResponseEntity<ApiResponse> deletarQuestaoDaSecao(@RequestHeader("Authorization") String token, @PathVariable Long idSecao,@PathVariable Long idQuest){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){

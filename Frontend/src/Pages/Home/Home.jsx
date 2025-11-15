@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 
+import api from "../../services/api.js";
 
 import Header from "../../Components/Header/Header";
 
@@ -10,79 +11,17 @@ import CardHome from "../../Components/CardHome/CardHome";
 function Home(){
 
     const [quest, setQuests] = useState([])
+    const [token] = useState(localStorage.getItem("token"));
 
-    const pegarQuestoes = () => {
-
-        const questoes = [{
-            "id": 1,
-            "titulo": "bigO",
-            "resumo": "Questõe sobre complexidade bigO",
-            "questoesList": [
-                {
-                    "id": 1,
-                    "enunciado": "O que é Ranma ?",
-                    "alternativaCorreta": "É tipo de viado",
-                    "dono": {
-                        "nickname": "Rony",
-                        "nivel": "UPE"
-                    }
-                },
-                {
-                    "id": 2,
-                    "enunciado": "Teste1",
-                    "alternativaCorreta": "Letra A",
-                    "dono": {
-                        "nickname": "Rony",
-                        "nivel": "UPE"
-                    }
-                },
-                {
-                    "id": 6,
-                    "enunciado": "Teste3",
-                    "alternativaCorreta": "Letra A",
-                    "dono": {
-                        "nickname": "Rony",
-                        "nivel": "UPE"
-                    }
-                }
-            ],
-            "dono": {
-                "nickname": "Rony",
-                "nivel": "UPE",
-                "pontuacao": "100"
+    const pegarQuestoes = async () => {
+        const res = await api.get("/pegarSecoes",{
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-        }, {
-            "id": 2,
-            "titulo": "Arrays",
-            "resumo": "Questõe sobre arrays e suas aplicações",
-            "questoesList": [
-                {
-                    "id": 3,
-                    "enunciado": "O que é a vida ?",
-                    "alternativaCorreta": "É tipo de viado",
-                    "dono": {
-                        "nickname": "Rony",
-                        "nivel": "UPE"
-                    }
-                },
-                {
-                    "id": 4,
-                    "enunciado": "Teste2",
-                    "alternativaCorreta": "Letra A",
-                    "dono": {
-                        "nickname": "Rony",
-                        "nivel": "UPE"
-                    }
-                }
-            ],
-            "dono": {
-                "nickname": "Rubens",
-                "nivel": "Iniciante",
-                "pontuacao": "50"
-            }
-        }]
+        });
 
-        setQuests(questoes)
+
+        setQuests(res.data.object)
     }
 
     useState(() => {
@@ -107,7 +46,7 @@ function Home(){
                                 subTitulo={questao_dados.resumo} 
 
                                 qntd_quest={questao_dados.questoesList.length}
-                                xp_final="20"
+                                xp_final={questao_dados.questoesList.length*10}
 
                                 professorNivel={questao_dados.dono.nivel}
                                 xp_prof={questao_dados.dono.pontuacao}

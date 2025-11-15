@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../../Components/Button/Button.jsx";
 
@@ -7,46 +8,28 @@ import Header from "../../Components/Header/Header";
 import CardQuest from "../../Components/CardHome/CardQuests/CardQuest";
 
 import styles from "./home.module.css"
+import api from "../../services/api.js";
 
 function SecaoQuests(){
 
+    const {id} = useParams(); //id da secao
+    const [token] = useState(localStorage.getItem("token"));
     const [quest, setQuests] = useState([]);
+    const [porcentagem, setPorcentagem] = useState(0);
     const [questCertas, setQuestCertas] = useState(0);
 
-    const pegarQuestoes = () => {
-        //requisição de pegar todas as questões
-        const questoes = [
-        {
-            "id": 1,
-            "enunciado": "Teste1",
-            "alternativas": [
-                "Letra A",
-                "Letra B",
-                "Letra C"
-            ],
-            "alternativaCorreta": "Letra A",
-            "dono": {
-                "nickname": "Rony",
-                "nivel": "UPE"
-            }
-        },
-        {
-            "id": 2,
-            "enunciado": "Teste2",
-            "alternativas": [
-                "Letra n",
-                "Letra m",
-                "Letra ç"
-            ],
-            "alternativaCorreta": "Letra ç",
-            "dono": {
-                "nickname": "Rony",
-                "nivel": "UPE"
-            }
-        }
-    ]
-    setQuests(questoes);
+    const navigate = useNavigate();
 
+    const pegarQuestoes = async() => {
+
+        const res = await api.get(`/pegarQuestoes/secao/${id}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(res);
+        //requisição de pegar todas as questões
+    setQuests(res.data.object);
     }
 
     useEffect(() => {
@@ -54,7 +37,8 @@ function SecaoQuests(){
     },[])
 
     const finalizar = () => {
-        console.log("Questões corretas: "+questCertas);
+        setPorcentagem((questCertas/quest.length)*100);
+        navigate("/finalizado",{state:{certas:questCertas, porcentagem:(questCertas/quest.length)*100}})
     }
     
 

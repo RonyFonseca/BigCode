@@ -5,7 +5,6 @@
 
 .sub_container_home {
     background-color: var(--color-02-white);
-    margin: 0px 35px;
     height: 100vh;
     max-width: 100%;
 }

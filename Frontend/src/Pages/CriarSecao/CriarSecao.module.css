@@ -1,0 +1,15 @@
+.header_criar_secao > h2{
+    font-size: 35px;
+}
+
+.form_criar_secao {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.criar_secao_informacoes_adicionais{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

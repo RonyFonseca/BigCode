@@ -1,0 +1,9 @@
+.input_container > input {
+    height: 30px;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid;
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+}

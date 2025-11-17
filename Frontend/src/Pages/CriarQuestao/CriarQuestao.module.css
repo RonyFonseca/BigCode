@@ -1,14 +1,115 @@
-.alternativas_container {
+.criar_questao {
+    display: flex;
+    flex-direction: column;
+    margin: 35px;
+}
 
+.criar_questao_header {
+    margin-bottom: 10px;
+}
+
+.criar_questao_header >h1 {
+    font-size: 46px;
+}
+
+.criar_questao_header > p {
+    font-size: 20px;
+}
+
+.alternativas_container {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
 }
 
 .adicionar_alternativas {
-
+    margin-top: 10px;
 }
 
-.criar_questao {
+.adicionar_alternativas > input {
+    width: 300px;
+    height: 25px;
+    border: 1px solid; 
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.adicionar_alternativas > button {
+    padding: 9px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: var(--color-01-white);
+}
+
+.adicionar_alternativa_correta {
+    margin-top: 40px;
     display: flex;
-    margin-top: 50px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.adicionar_alternativa_correta_opcs {
+    border-radius: 10px;
+    border: 1px solid; 
+    max-width: 500px;
+    height: 40px;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 5px;
+    gap: 10px;
+}
+
+.adicionar_alternativa_correta_opcs > button {
+    background-color: var(--color-01-white);
+    border: 1px solid;
+    padding: 5px 25px;
+    border-radius: 10px;
+}
+
+.butao_criar_quests {
+    padding: 10px; 
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid; 
+    background-color: var(--color-01-white);
+}
+
+.questoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card_questoe {
+    background-color: var(--color-01-white);
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.card_questoe > h3 {
+    font-size: 25px;
+}
+
+.card_questoe > ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.card_questao_lixo {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.card_questao_lixo > button {
+    font-size: 14px;
+    padding: 2px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }

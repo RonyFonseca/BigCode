@@ -79,11 +79,11 @@ public class SecaoQuestoesController {
         SecaoDeQuestoes secao = new SecaoDeQuestoes(dto.getTitulo(), dto.getResumo(), userToken);
 
         secaoRepository.save(secao);
-        return ResponseEntity.status(200).body(new ApiResponse("Seção criada"));
+        return ResponseEntity.status(200).body(new ApiResponse("Seção criada", secao.getId()));
     }
 
     @PutMapping("/adicionar/secao/{idSecao}/{idQuest}")
-    public ResponseEntity<ApiResponse> adicionarQuestaoNaSecao(@PathVariable Long idSecao,@PathVariable Long idQuest, @RequestHeader String token){
+    public ResponseEntity<ApiResponse> adicionarQuestaoNaSecao(@PathVariable Long idSecao,@PathVariable Long idQuest, @RequestHeader("Authorization") String token){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){

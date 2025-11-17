@@ -78,7 +78,7 @@ public class UserController {
         user.setSenha(novaSenha);
 
         repository.save(user);
-        String token = jwt.generateToken(user.getEmail());
+        String token = jwt.generateToken(user.getEmail(), user.getTipo());
 
         return ResponseEntity.status(200).body(new ApiResponse("Usuário criado com sucesso !", token));
     }
@@ -107,7 +107,7 @@ public class UserController {
             return ResponseEntity.status(400).body(new ApiResponse("Senha incorreta"));
         }
 
-        return ResponseEntity.status(200).body(new ApiResponse("Logado",jwt.generateToken(usuarioDoBanco.getEmail())));
+        return ResponseEntity.status(200).body(new ApiResponse("Logado",jwt.generateToken(usuarioDoBanco.getEmail(), usuarioDoBanco.getTipo())));
     }
 
     @DeleteMapping("/delete/{id}")

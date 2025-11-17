@@ -14,6 +14,7 @@ import FinalizarQuests from "./Pages/Home/FinalizarQuests.jsx";
 //--------Criação-------------------
 import CriarQuestao from "./Pages/CriarQuestao/CriarQuestao.jsx"; 
 import CriarSecao from "./Pages/CriarSecao/CriarSecao.jsx";
+import TelaFinalSecao from "./Pages/CriarSecao/TelaFinal/TelaFinalSecao.jsx";
 
 //---------Private------------
 import PrivateRoute from "./routes/PrivateRoute.jsx";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/finalizado" element={<FinalizarQuests />} />
           <Route path="/criar/quests" element={<CriarQuestao />} />
           <Route path="/criar/secao" element={<CriarSecao />} />
+          <Route path="/criar/secao/concluido" element={<TelaFinalSecao />} />
 
         </Routes>
       </BrowserRouter>

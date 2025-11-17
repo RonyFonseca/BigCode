@@ -30,7 +30,7 @@ public class QuestoesController {
 
     @RequestMapping("/create")
     @PostMapping
-    public ResponseEntity<ApiResponse> criarQuestao(@RequestBody dtoQuest dto, @RequestHeader String token){
+    public ResponseEntity<ApiResponse> criarQuestao(@RequestBody dtoQuest dto,  @RequestHeader("Authorization") String token){
 
         Questoes questao = new Questoes();
         token = token.split("Bearer ")[1];
@@ -57,7 +57,7 @@ public class QuestoesController {
 
         repositoryQuest.save(questao);
 
-        return ResponseEntity.status(201).body(new ApiResponse("Questão criada com sucesso !"));
+        return ResponseEntity.status(201).body(new ApiResponse("Questão criada com sucesso !", questao));
 
     }
 

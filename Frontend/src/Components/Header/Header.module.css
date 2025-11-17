@@ -2,13 +2,28 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 20px;
+
 }
 
 header > i {
     font-size: 35px;
 }
 
-header > img {
+header > div {
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
+}
+
+header > div > ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+header > div > img {
     width: 100px;
 }

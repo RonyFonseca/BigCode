@@ -1,5 +1,6 @@
 package com.big.code.Backend.services;
 
+import com.big.code.Backend.model.enums.TipoUsuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -23,7 +24,7 @@ public class JWT {
         secretKey = Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    public String generateToken(String email){
+    public String generateToken(String email, TipoUsuario tipo){
         return Jwts.builder().setSubject(email).setIssuedAt(new Date()).signWith(secretKey).compact();
     }
 

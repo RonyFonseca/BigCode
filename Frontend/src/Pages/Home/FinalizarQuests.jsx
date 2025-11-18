@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 
+import api from "../../services/api.js";
+
 import Button from "../../Components/Button/Button";
 
 import styles from "./home.module.css";

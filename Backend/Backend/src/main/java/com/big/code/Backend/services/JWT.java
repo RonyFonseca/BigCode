@@ -24,8 +24,8 @@ public class JWT {
         secretKey = Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    public String generateToken(String email, TipoUsuario tipo){
-        return Jwts.builder().setSubject(email).setIssuedAt(new Date()).signWith(secretKey).compact();
+    public String generateToken(String email, Long id, TipoUsuario tipoUsuario){
+        return Jwts.builder().claim("tipo",tipoUsuario).claim("user_id",id).setSubject(email).setIssuedAt(new Date()).signWith(secretKey).compact();
     }
 
     public String extractEmail(String token){

@@ -24,7 +24,7 @@ public class RankingController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> rankingAtual(@RequestHeader String token){
+    public ResponseEntity<ApiResponse> rankingAtual(@RequestHeader("Authorization") String token){
         token = token.split("Bearer ")[1];
 
         if(!jwt.validateToken(token)){

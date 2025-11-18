@@ -9,6 +9,7 @@ import com.big.code.Backend.repository.UserRepository;
 import com.big.code.Backend.services.EmailCodeService;
 import com.big.code.Backend.services.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -78,7 +79,7 @@ public class UserController {
         user.setSenha(novaSenha);
 
         repository.save(user);
-        String token = jwt.generateToken(user.getEmail(), user.getTipo());
+        String token = jwt.generateToken(user.getEmail(), user.getId(),user.getTipo());
 
         return ResponseEntity.status(200).body(new ApiResponse("Usuário criado com sucesso !", token));
     }
@@ -94,7 +95,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody User user){
+    public ResponseEntity<ApiResponse> login(@RequestBody dtoUser user){
+
+        if (user.getSenha() == null || user.getSenha().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("O campo de senha é obrigatório."));
+        }
 
         if(!(repository.existsByEmail(user.getEmail()))){
             return ResponseEntity.status(400).body(new ApiResponse("Usuário não encontrado"));
@@ -107,7 +112,7 @@ public class UserController {
             return ResponseEntity.status(400).body(new ApiResponse("Senha incorreta"));
         }
 
-        return ResponseEntity.status(200).body(new ApiResponse("Logado",jwt.generateToken(usuarioDoBanco.getEmail(), usuarioDoBanco.getTipo())));
+        return ResponseEntity.status(200).body(new ApiResponse("Logado",jwt.generateToken(usuarioDoBanco.getEmail(), usuarioDoBanco.getId(), usuarioDoBanco.getTipo())));
     }
 
     @DeleteMapping("/delete/{id}")

@@ -19,8 +19,6 @@ function Home(){
                 Authorization: `Bearer ${token}`
             }
         });
-
-
         setQuests(res.data.object)
     }
 
@@ -33,13 +31,12 @@ function Home(){
             <div className={styles.sub_container_home}>
                 <Header />
                 <main>
-                    <div>
-                        informações gerais.
-                    </div>
                     <section className={styles.cards_home}>
-                        {quest.map((questao_dados) =>(
-                            <CardHome key={questao_dados.id}
-
+                        {quest.length>0?(
+                            <>
+                            {quest.map((questao_dados,index) =>(
+                            <CardHome key={index}
+                            
                                 card_id={questao_dados.id}    
 
                                 titulo={questao_dados.titulo} 
@@ -53,6 +50,8 @@ function Home(){
                                 name_prof={questao_dados.dono.nickname}
                             />
                         ))}
+                            </>
+                        ):"Não tem questões"}
                     </section>
                 </main>
             </div>

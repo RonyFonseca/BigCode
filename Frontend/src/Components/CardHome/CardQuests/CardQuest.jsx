@@ -2,8 +2,12 @@ import styles from "./CardQuest.module.css";
 
 import { useState } from "react";
 
+import api from "../../../services/api";
+
 function CardQuest(props){
     const alfa = ["A","B","C","D","E"]
+
+    const [token] = useState(localStorage.getItem("token"));
 
     const [respondido, setRespondido] = useState(false); 
 
@@ -11,14 +15,18 @@ function CardQuest(props){
 
     const [acertou, setAcertou] = useState(false)
 
-    const responderQuest = (idAlternativa,dados) => {
+    const responderQuest = async(id,idAlternativa,dados) => {
         const alternativas = props.alternativas; 
         setRespondido(true);
 
         if(props.alternativaCorreta===dados){
-            setAlterCerta(idAlternativa);
-            setAcertou(true);
-            props.acertou();
+            const res = await api.put(`/questoes/responder/${id}`,{alternativaUsuario:dados},{headers:{
+                Authorization: `Bearer ${token}`
+            }}).then(()=> {
+                setAlterCerta(idAlternativa);
+                setAcertou(true);
+                props.acertou();
+            });
         }
     }
 
@@ -32,7 +40,7 @@ function CardQuest(props){
 
                 <div className={styles.card_footer}>
                     <ul className={styles.card_quest_alternativas}>
-                        {props.alternativas.map((dados, index) => (<li key={index} className={styles.card_quest_alternativa} onClick={() => responderQuest(index,dados)}><button className={respondido? acertou&&index==alterCerta?styles.acertou:styles.errou:styles.card_quest_alternativas_buttons}>{alfa[index]}</button>{dados}</li>))}
+                        {props.alternativas.map((dados, index) => (<li key={index} className={styles.card_quest_alternativa} onClick={() => responderQuest(props.id_quest,index,dados)}><button className={respondido? acertou&&index==alterCerta?styles.acertou:styles.errou:styles.card_quest_alternativas_buttons}>{alfa[index]}</button>{dados}</li>))}
                     </ul>
                 </div>
         </div>

@@ -32,7 +32,7 @@ public class Questoes implements Serializable {
     //outra ponta do relacionamento n - 1
     @ManyToOne
     @JoinColumn(name="dono_id")
-    @JsonIgnoreProperties({"senha","tipo","email","id","pontuacao"})
+    @JsonIgnoreProperties({"senha","tipo","email","id"})
     private User dono;
 
     public ArrayList<Long> getRespostas() {

@@ -118,7 +118,7 @@ public class QuestoesController {
 
     @RequestMapping("/responder/{id}")
     @PutMapping
-    public ResponseEntity<ApiResponse> responderQuestao(@PathVariable Long id, @RequestHeader String token, @RequestBody Map<String, String> body){
+    public ResponseEntity<ApiResponse> responderQuestao(@PathVariable Long id,  @RequestHeader("Authorization") String token, @RequestBody Map<String, String> body){
         token = token.split("Bearer ")[1];
 
         if(!(jwt.validateToken(token))){
@@ -128,21 +128,33 @@ public class QuestoesController {
         Questoes questaoDoBanco = repositoryQuest.findById(id).orElse(null);
         User userToken = repositoryUser.findByEmail(jwt.extractEmail(token));
 
-        if(!(questaoDoBanco.getRespostas().isEmpty())){
-            for(Long ids:questaoDoBanco.getRespostas()){
-                if(ids.equals(userToken.getId())){
-                    userToken.setPontuacao(userToken.getPontuacao()+1);
-                }
+        User dono = repositoryUser.findById(questaoDoBanco.getDono().getId()).orElse(null);
+
+// 1. O dono não pode responder a própria questão.
+        if (!(dono.getId().equals(userToken.getId()))) {
+
+            // 2. Verifica se a resposta selecionada está na lista de respostas corretas da questão.
+            boolean respostaCorreta = questaoDoBanco.getRespostas().contains(questaoDoBanco);
+
+            // 3. Calcula a pontuação APENAS UMA VEZ.
+            if (respostaCorreta) {
+                // Resposta Correta: Recompensa
+                userToken.setPontuacao(userToken.getPontuacao() + 20); // Pontuação maior
+            } else {
+                // Resposta Incorreta: Penalidade ou pontuação mínima (ou zero)
+                userToken.setPontuacao(userToken.getPontuacao() + 1);  // Pontuação mínima (ex: por tentar)
             }
-        } else {
-            userToken.setPontuacao(userToken.getPontuacao()+20);
-            questaoDoBanco.setRespostas(userToken.getId());
+
+            // 4. Recompensa o Dono da Questão (se alguém respondeu)
+            dono.setPontuacao(dono.getPontuacao() + 30);
+
+            // 5. Opcional: Salvar ambas as entidades (userToken e dono) no banco.
         }
 
         if(!(body.get("alternativaUsuario").toLowerCase().equals(questaoDoBanco.getAlternativaCorreta().toLowerCase()))) {
             return ResponseEntity.status(400).body(new ApiResponse("Resposta incorreta"));
         }
-
+        repositoryUser.save(dono);
         repositoryUser.save(userToken);
         return ResponseEntity.status(200).body(new ApiResponse("Resposta Correta !"));
     }

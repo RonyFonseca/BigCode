@@ -27,7 +27,6 @@ function SecaoQuests(){
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(res);
         //requisição de pegar todas as questões
     setQuests(res.data.object);
     }

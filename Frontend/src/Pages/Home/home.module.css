@@ -17,7 +17,7 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    margin: 20px;
+    margin: 100px 20px;
     align-items: center;
     justify-content: center;
 }

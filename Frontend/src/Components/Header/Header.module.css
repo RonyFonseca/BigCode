@@ -6,14 +6,14 @@ header {
 
 }
 
-header > i {
+.logo_home_link  {
     font-size: 35px;
 }
 
 header > div {
     display: flex;
     justify-content: space-around;
-    width: 600px;
+    width: 700px;
 }
 
 header > div > ul {

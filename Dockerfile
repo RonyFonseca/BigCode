@@ -7,7 +7,7 @@ COPY . .
 RUN apt-get-install maven -y
 RUN mvn clean install
 
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-alpine
 
 EXPOSE 8080
 

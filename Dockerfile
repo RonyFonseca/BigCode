@@ -1,16 +1,14 @@
-FROM ubuntu:latest AS build
+# Etapa 1: Build com Maven
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn -e -X -DskipTests package
 
-RUN apt-get-update
-RUN apt-get install openjdk-21-jdk -y
-COPY . .
-
-RUN apt-get-install maven -y
-RUN mvn clean install
-
+# Etapa 2: Execução da aplicação
 FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
-
-COPY --from=build /Backend/target/Backend-0.0.1-SNAPSHOT.jar app.jar
-
 ENTRYPOINT ["java", "-jar", "app.jar"]

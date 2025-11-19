@@ -8,7 +8,7 @@ COPY Backend/Backend/src ./src
 
 RUN mvn -e -X -DskipTests clean package
 
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 

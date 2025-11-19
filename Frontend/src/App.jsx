@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 //----------Paginas-----------
 import Login from "./Pages/Auth/Login.jsx"; 
+import Logout from "./Pages/Auth/Logout.jsx";
 import Register from "./Pages/Auth/Register.jsx";
 import EmailValidate from "./Pages/Auth/EmailValidate.jsx";
 import Home from "./Pages/Home/Home.jsx"
@@ -31,9 +32,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login/>}/>
+          <Route path="/logout" element={<Logout/>}/>
           <Route path="/register" element={<Register/>} />
       
-          <Route path="/register/validate" element={<PrivateRoute><EmailValidate /></PrivateRoute>} />
+          <Route path="/register/validate" element={<EmailValidate />} />
 
           <Route path="/home" element={<Home />} />
           <Route path="/quests/res/:id" element={<SecaoQuests />} />

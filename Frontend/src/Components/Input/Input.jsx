@@ -22,7 +22,6 @@ function Input(props){
             if(input.length >= 20){
                 setContemAssunto(true);
             } else {
-                console.log(input.length)
                 setContemAssunto(false);
             }
         }else {

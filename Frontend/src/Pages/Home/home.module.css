@@ -9,6 +9,10 @@
     max-width: 100%;
 }
 
+.sub_container_home > h1 {
+    text-align: center;
+}
+
 .informations_quests {
     margin: 20px;
 }
@@ -17,7 +21,7 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    margin: 100px 20px;
+    margin: 50px 20px;
     align-items: center;
     justify-content: center;
 }
@@ -61,4 +65,8 @@
 
 .analise > div > ul > li {
     margin-top: 5px;
+}
+
+.finalizado {
+    margin-left: 35px;
 }

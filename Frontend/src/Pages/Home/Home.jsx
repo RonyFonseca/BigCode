@@ -30,6 +30,7 @@ function Home(){
         <div className={styles.container_home}>
             <div className={styles.sub_container_home}>
                 <Header />
+                <h1>Questões globais</h1>
                 <main>
                     <section className={styles.cards_home}>
                         {quest.length>0?(

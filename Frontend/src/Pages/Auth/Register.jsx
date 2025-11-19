@@ -11,6 +11,8 @@ import usuarioCadastrando from "../../assets/images/auth/usuario_cadastrando.svg
 
 import { useAuth } from "../../context/AuthContext.jsx";
 
+import api from "../../services/api.js";
+
 
 function Register(){
 
@@ -22,6 +24,8 @@ function Register(){
     const [nome, setNome] = useState("");
     const [senhaConfirmacao, setSenhaConfirmacao] = useState("");
     const [senha, setSenha] = useState("");
+
+    const [marcado, setMarcado] = useState(false);
 
     const pegarValorEmail = (event) => {
         setEmail(event);
@@ -38,10 +42,31 @@ function Register(){
         setSenhaConfirmacao(event);
     }
 
+
+    const handleChange = (e) => {
+        setMarcado(e.target.checked);
+    }
+
     const enviarDados = async(e) => {
         e.preventDefault(); 
-        const ok = await login(email,senha);
-        navigate("/register/validate");
+        if(senhaConfirmacao!==senha){
+            console.log("Senha diferentes")
+        }
+
+        const res = await api.post("users/create",{
+            nickname:nome, 
+            email:email,
+            senha:senha
+        })
+
+        console.log(res);
+
+        if(res.status==200){
+            navigate("/register/validate",{state:{nome:nome,email:email,senha:senha,marcado:marcado}});
+        }
+
+        //const ok = await login(email,senha);
+        //navigate("/register/validate");
     }
 
     return (
@@ -60,6 +85,10 @@ function Register(){
                     <Input icon="bi bi-envelope" placeholder="E-mail" valor={email} onChange={(event) => pegarValorEmail(event)}/>
                     <Input icon="bi bi-person-lock" placeholder="Senha" valor={senha} onChange={(event) => pegarValorSenha(event)}/>
                     <Input icon="bi bi-person-lock" placeholder="Confirmação" valor={senha} onChange={(event) => pegarValorSenhaConfirmacao(event)}/>
+                    <div className={styles.check_teacher}>
+                        <input type="checkbox" checked={marcado} onChange={handleChange} />
+                        <p>Deseja criar essa conta como professor ?</p>
+                    </div>
                     <Button assunto="Criar" />
                 </form>
             </div>

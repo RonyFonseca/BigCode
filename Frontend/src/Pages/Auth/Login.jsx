@@ -37,7 +37,7 @@ function Login(){
     const enviarDados = async(e) => {
         e.preventDefault();
         const ok = await login(email,senha);
-        navigate("/register/validate")
+        navigate("/home")
     }
     
 

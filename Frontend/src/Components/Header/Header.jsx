@@ -29,13 +29,15 @@ function Header(){
             <Link to="/home" className={styles.logo_home_link}><i className="bi bi-house"></i></Link>
             <div>
                 <ul>
-                    {tipo=="ADM"?(<li><Link to="/criar/secao">Criar Questões</Link></li>):""}
-                    <li><Link to="/meuperfil">Meu perfil</Link></li>
-                    <li><Link to="/ranking">Ranking Global</Link></li>
-                    <li><Link to="">Estudo</Link></li>
+                    {tipo=="ADM"?(<li><i className="bi bi-box-seam-fill"></i> <Link to="/criar/secao">Criar Questões</Link></li>):""}
+                    <li><i className="bi bi-person-bounding-box"></i> <Link to="/meuperfil">Meu perfil</Link></li>
+                    <li><i className="bi bi-clipboard-data-fill"></i> <Link to="/ranking">Ranking Global</Link></li>
+                    <li><i className="bi bi-book-fill"></i> <Link to="">Estudo</Link></li>
                 </ul>
-                <img src={SubLogo} />
             </div>
+            <Link to="/logout">
+                <img src={SubLogo} className={styles.sub_logo} />
+            </Link>
         </header>
     )
 }

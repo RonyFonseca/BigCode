@@ -131,24 +131,16 @@ public class QuestoesController {
         User dono = repositoryUser.findById(questaoDoBanco.getDono().getId()).orElse(null);
 
 // 1. O dono não pode responder a própria questão.
+        System.out.println(questaoDoBanco.getRespostas());
         if (!(dono.getId().equals(userToken.getId()))) {
-
-            // 2. Verifica se a resposta selecionada está na lista de respostas corretas da questão.
-            boolean respostaCorreta = questaoDoBanco.getRespostas().contains(questaoDoBanco);
-
-            // 3. Calcula a pontuação APENAS UMA VEZ.
-            if (respostaCorreta) {
-                // Resposta Correta: Recompensa
-                userToken.setPontuacao(userToken.getPontuacao() + 20); // Pontuação maior
-            } else {
-                // Resposta Incorreta: Penalidade ou pontuação mínima (ou zero)
-                userToken.setPontuacao(userToken.getPontuacao() + 1);  // Pontuação mínima (ex: por tentar)
+            if(questaoDoBanco.getRespostas().contains(userToken.getId())){
+                userToken.setPontuacao(userToken.getPontuacao() + 1);
+            }else {
+                userToken.setPontuacao(userToken.getPontuacao() + 20);
+                questaoDoBanco.setRespostas(userToken.getId());
             }
-
             // 4. Recompensa o Dono da Questão (se alguém respondeu)
-            dono.setPontuacao(dono.getPontuacao() + 30);
-
-            // 5. Opcional: Salvar ambas as entidades (userToken e dono) no banco.
+            dono.setPontuacao(dono.getPontuacao() + 4);
         }
 
         if(!(body.get("alternativaUsuario").toLowerCase().equals(questaoDoBanco.getAlternativaCorreta().toLowerCase()))) {

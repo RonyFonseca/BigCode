@@ -3,7 +3,7 @@ header {
     align-items: center;
     justify-content: space-between;
     margin: 20px;
-
+    padding-bottom: 50px;
 }
 
 .logo_home_link  {
@@ -13,7 +13,6 @@ header {
 header > div {
     display: flex;
     justify-content: space-around;
-    width: 700px;
 }
 
 header > div > ul {
@@ -21,9 +20,21 @@ header > div > ul {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 50px;
+    gap: 30px;
+    margin-right: 25px;
 }
 
-header > div > img {
+header > div> ul > li {
+    background-color: var(--color-01-white);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+header > div> ul > li > i {
+    margin-right: 5px;
+}
+
+.sub_logo {
     width: 100px;
 }

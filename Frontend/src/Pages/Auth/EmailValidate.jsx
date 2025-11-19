@@ -6,31 +6,60 @@ import styles from "./Auth.module.css";
 import usuarioLogando from "../../assets/images/auth/usuario_logando.svg";
 import logo from "../../assets/images/logo.PNG";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 
+import { useAuth } from "../../context/AuthContext.jsx";
+
+import { useLocation,useNavigate } from "react-router-dom";
+
+
+import api from "../../services/api.js";
+
 function EmailValidate(){
-        const [email, setEmail] = useState("");
-        const [senha, setSenha] = useState("");
+
+        const {login} = useAuth();
+
+        const location = useLocation();
+        const navigate = useNavigate();
+
+        const {nome,email,senha,marcado} = location.state;
+        
+        const [tipo, setTipo] = useState("");
+
+        const [codigo, setCodigo] = useState("");
+        //const [senha, setSenha] = useState("");
+
+        useEffect(() => {
+            if(marcado){
+                setTipo("ADM");
+            }else {
+                setTipo("ALUNO");
+            }
+        },[])
 
         const pegarValorEmail = (event) => {
             if(event.trim() ==  ""){
-                console.log("O email ta vazio !")
+                console.log("O Codigo ta vazio !")
             }
-            setEmail(event);
+            setCodigo(event);
         }
 
-        const pegarValorSenha = (event) => {
-            if(event.trim() == ""){
-                console.log("Senha está vazia")
-            }
-            setSenha(event); 
-        }
-
-        const enviarDados = (e) => {
+        const enviarDados = async(e) => {
             e.preventDefault();
-            if(email.includes("@")){
-                console.log(email);
+            const res = await api.post("/users/confirm/create",{
+                nickname:nome,
+                email:email,
+                senha:senha,
+                codigo:codigo,
+                tipo
+            })
+
+            if(res.status==200){
+                if(res.data.object){
+                    const ok = await login(email,senha);
+                    navigate("/home");
+                }
             }
         }
         
@@ -47,7 +76,7 @@ function EmailValidate(){
                         <p>faça login e aproveite a plataforma</p>
                     </div>
                     <form action="" onSubmit={(e) => enviarDados(e)} className={styles.form_lateral_inputs}>
-                        <Input icon="bi bi-envelope" placeholder="E-mail" valor={email} onChange={(event) => pegarValorEmail(event)}/>
+                        <Input icon="bi bi-envelope" placeholder="Codigo" valor={email} onChange={(event) => pegarValorEmail(event)}/>
                         <Button assunto="Validar" />
                     </form>
                 </div>

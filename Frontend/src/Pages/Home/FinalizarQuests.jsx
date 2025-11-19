@@ -20,7 +20,7 @@ function FinalizarQuests(){
         <div className={styles.container_home}>
             <div className={styles.sub_container_home}>
                 <Header />
-                <main>
+                <main className={styles.finalizado}>
                     <div className={styles.header_analise}>
                         <h1>Seção concluida</h1>
                         <p>Fique a vontade para refazer quantas vezes quiser essa seção.</p>
@@ -32,7 +32,7 @@ function FinalizarQuests(){
                             <ul>
                                 <li>Acertos: {certas}</li>
                                 <li>Porcentagem de acertos: {porcentagem}%</li>
-                                <li>XP ganho: {certas*10}</li>
+                                <li>XP ganho: {certas*20}</li>
                             </ul>
                         </div>
                     </section>

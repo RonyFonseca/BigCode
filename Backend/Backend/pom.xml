@@ -89,26 +89,21 @@
 
     <build>
         <plugins>
-
-            <!-- IMPORTANTE: COMPILADOR JAVA 21 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
+                    <source>21</source>
+                    <target>21</target>
                     <release>21</release>
                 </configuration>
             </plugin>
 
-            <!-- CRIA O .jar FINAL (NECESSÁRIO PRO DOCKER) -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludeDevtools>false</excludeDevtools>
-                </configuration>
             </plugin>
-
         </plugins>
     </build>
 

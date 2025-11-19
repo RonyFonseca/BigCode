@@ -1,13 +1,10 @@
-FROM eclipse-temurin:21-jdk AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-COPY Backend/Backend/pom.xml .
-COPY Backend/Backend/src ./src
+RUN mvn -DskipTests clean package
 
-RUN ./mvnw -q -DskipTests package || mvn -q -DskipTests package
-
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /app
 

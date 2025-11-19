@@ -1,15 +1,19 @@
-# Etapa 1: build com Maven
-FROM openjdk:21-jdk
+# ===========================
+# 1) BUILD
+# ===========================
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn -e -X -DskipTests clean package
+RUN mvn -DskipTests clean package
 
-# Etapa 2: imagem final
-FROM eclipse-temurin:21-jdk
+# ===========================
+# 2) RUN
+# ===========================
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 

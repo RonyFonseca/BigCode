@@ -13,6 +13,8 @@ import { useAuth } from "../../context/AuthContext.jsx";
 
 import api from "../../services/api.js";
 
+import Loading from "../../Components/Loading/Loading.jsx";
+
 
 function Register(){
 
@@ -26,6 +28,8 @@ function Register(){
     const [senha, setSenha] = useState("");
 
     const [marcado, setMarcado] = useState(false);
+
+    const [loading,setLoading] = useState(false);
 
     const pegarValorEmail = (event) => {
         setEmail(event);
@@ -48,6 +52,7 @@ function Register(){
     }
 
     const enviarDados = async(e) => {
+        setLoading(true);
         e.preventDefault(); 
         if(senhaConfirmacao!==senha){
             console.log("Senha diferentes")
@@ -59,39 +64,38 @@ function Register(){
             senha:senha
         })
 
-        console.log(res);
-
         if(res.status==200){
             navigate("/register/validate",{state:{nome:nome,email:email,senha:senha,marcado:marcado}});
         }
-
-        //const ok = await login(email,senha);
-        //navigate("/register/validate");
     }
 
     return (
         <main className ={styles.tela_central}>
-            <div className={styles.container_img}>
-                <img src={usuarioCadastrando} />
-            </div>
-            <div className={styles.form_lateral}>
-                <img src={logo} className={styles.logo}/>
-                <div className={styles.form_lateral_informacoes}>
-                    <p>Bem vindo!</p>
-                    <p>faça a criação e aproveite a plataforma.</p>
+            {loading?(<Loading />):(
+                <>
+                    <div className={styles.container_img}>
+                    <img src={usuarioCadastrando} />
                 </div>
-                <form action="" onSubmit={(e) => enviarDados(e)} className={styles.form_lateral_inputs}>
-                    <Input icon="bi bi-person" placeholder="Nome" valor={email} onChange={(event) => pegarValorNome(event)}/>
-                    <Input icon="bi bi-envelope" placeholder="E-mail" valor={email} onChange={(event) => pegarValorEmail(event)}/>
-                    <Input icon="bi bi-person-lock" placeholder="Senha" valor={senha} onChange={(event) => pegarValorSenha(event)}/>
-                    <Input icon="bi bi-person-lock" placeholder="Confirmação" valor={senha} onChange={(event) => pegarValorSenhaConfirmacao(event)}/>
-                    <div className={styles.check_teacher}>
-                        <input type="checkbox" checked={marcado} onChange={handleChange} />
-                        <p>Deseja criar essa conta como professor ?</p>
+                <div className={styles.form_lateral}>
+                    <img src={logo} className={styles.logo}/>
+                    <div className={styles.form_lateral_informacoes}>
+                        <p>Bem vindo!</p>
+                        <p>faça a criação e aproveite a plataforma.</p>
                     </div>
-                    <Button assunto="Criar" />
-                </form>
-            </div>
+                    <form action="" onSubmit={(e) => enviarDados(e)} className={styles.form_lateral_inputs}>
+                        <Input icon="bi bi-person" placeholder="Nome" valor={email} onChange={(event) => pegarValorNome(event)}/>
+                        <Input icon="bi bi-envelope" placeholder="E-mail" valor={email} onChange={(event) => pegarValorEmail(event)}/>
+                        <Input icon="bi bi-person-lock" placeholder="Senha" valor={senha} onChange={(event) => pegarValorSenha(event)}/>
+                        <Input icon="bi bi-person-lock" placeholder="Confirmação" valor={senha} onChange={(event) => pegarValorSenhaConfirmacao(event)}/>
+                        <div className={styles.check_teacher}>
+                            <input type="checkbox" checked={marcado} onChange={handleChange} />
+                            <p>Deseja criar essa conta como professor ?</p>
+                        </div>
+                        <Button assunto="Criar" />
+                    </form>
+                </div>
+                </>
+            )}         
         </main>
     )
 }

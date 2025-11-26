@@ -1,20 +1,27 @@
 .card_container {
     background-color: var(--color-01-white);
     width: 700px;
-    padding: 30px;
+    padding: 20px;
     border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: 1s;
+}
+
+.card_container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .card_header > h3{
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .card_header > p{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .card_footer{
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -30,7 +37,7 @@
 }
 
 .card_informations > h5 {
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .card_informations > ul {

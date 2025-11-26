@@ -9,8 +9,6 @@ function CardHome(props){
     const navigate = useNavigate(); 
 
     const comecarQuests = (e) => { 
-        //Valido token para segurança; 
-        //Guardar a informação da questao no localHost 
         navigate(`/quests/res/${e}`);
     }
     return(

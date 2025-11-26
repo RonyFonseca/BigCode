@@ -29,10 +29,11 @@ function Header(){
             <Link to="/home" className={styles.logo_home_link}><i className="bi bi-house"></i></Link>
             <div>
                 <ul>
-                    {tipo=="ADM"?(<li><i className="bi bi-box-seam-fill"></i> <Link to="/criar/secao">Criar Questões</Link></li>):""}
-                    <li><i className="bi bi-person-bounding-box"></i> <Link to="/meuperfil">Meu perfil</Link></li>
+                    <li><i className="bi bi-house"></i> <Link to="/home">Home</Link></li>
                     <li><i className="bi bi-clipboard-data-fill"></i> <Link to="/ranking">Ranking Global</Link></li>
-                    <li><i className="bi bi-book-fill"></i> <Link to="">Estudo</Link></li>
+                    <li><i className="bi bi-book-fill"></i> <Link to="/estudos">Estudo</Link></li>
+                    <li><i className="bi bi-person-bounding-box"></i> <Link to="/meuperfil">Meu perfil</Link></li>
+                    {tipo=="ADM"?(<li><i className="bi bi-box-seam-fill"></i> <Link to="/criar/secao">Criar Questões</Link></li>):""}
                 </ul>
             </div>
             <Link to="/logout">

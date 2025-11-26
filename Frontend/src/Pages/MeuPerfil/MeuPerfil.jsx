@@ -8,6 +8,8 @@ import styles from "./MeuPerfil.module.css";
 
 import api from "../../services/api.js";
 
+import O_3d from "../../assets/images/O_3d.png";
+
 function MeuPerfil(){
 
     const [token] = useState(localStorage.getItem("token"));
@@ -43,7 +45,7 @@ function MeuPerfil(){
                         <>
                             <div className={styles.header_perfil}>
                                 <div className={styles.foto_perfil}>
-                                    <i className="bi bi-person"></i>
+                                    {O_3d?(<img src={O_3d} className={styles.logo}/>):(<i className="bi bi-person"></i>)}
                                 </div>
                                 <h2>{user.nickname}</h2>
                                 <ul>

@@ -29,6 +29,13 @@ header > div> ul > li {
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(87, 87, 87, 0.15);
+    transition: 1s;
+}
+
+header > div> ul > li:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(87, 87, 87, 0.15);
 }
 
 header > div> ul > li > i {

@@ -1,6 +1,12 @@
-
+.logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
 
 .foto_perfil {
+    position: relative;
     background-color: var(--color-01-white);
     width: 200px;
     height: 200px;

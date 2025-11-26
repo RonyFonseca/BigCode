@@ -1,17 +1,20 @@
 .tela_central {
     background-color:#A28EC8;
-    display: flex;
-    align-items: center;
     height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 50px;
+    padding: 0px;
 }
 
 .logo {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .container_img > img {
-    width: 650px;
+    width: 400px;
 }
 
 .form_lateral {

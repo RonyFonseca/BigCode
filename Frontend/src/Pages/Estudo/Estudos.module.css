@@ -1,0 +1,69 @@
+.body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+}
+
+.titulo {
+    text-align: center;
+    font-size: 1.8rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; 
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card_item {
+    flex: 0 0 300px; 
+    display: flex;
+    justify-content: center;
+}
+
+.titulo_card {
+    font-size: 1.4rem;
+    margin: 0;
+    text-align: center;
+}
+
+.pagina {  
+    border: 2px solid var(--color-01-purple);
+    background-color: var(--color-01-white);
+    border-radius: 5px;
+    padding: 1rem 1.5rem; 
+    text-decoration: none;
+    width: 100%;
+    height: 150px; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.pagina:hover {
+    background-color: var(--hover-botao-voltar);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

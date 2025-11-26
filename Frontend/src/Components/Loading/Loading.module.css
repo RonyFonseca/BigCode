@@ -1,0 +1,15 @@
+.loading {
+    width: 200px;
+}
+
+
+.loading_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loading_container > h4 {
+    color: var(--color-01-white)
+}
